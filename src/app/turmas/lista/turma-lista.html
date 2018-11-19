@@ -1,0 +1,14 @@
+<h6 class="text-center">Lista de Turmas</h6><br/>
+<table class="table table-sm table-hover">
+  <tr *ngFor="let t of turmasLista">
+      <td> {{ t.nome }} </td>
+      <td>
+        <button class="btn btn-primary" (click)="editarTurma(t)">
+          <i class="fa fa-pencil"></i>
+        </button>
+        <button class="btn btn-danger" (click)="deletarTurma(t.$codigoTurma)">
+          <i class="fa fa-trash-o"></i>
+        </button>
+      </td>
+  </tr>
+</table>

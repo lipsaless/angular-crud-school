@@ -1,0 +1,22 @@
+<h6 class="text-center">Cadastrar disciplina</h6><br/>
+<form #disciplinaForm="ngForm" (ngSubmit)="submitarFormulario(professorForm)">
+    <input type="hidden" name="$codigoDisciplina" #$key="ngModel" [(ngModel)]="disciplinaService.disciplinaSelecionada.$codigoDisciplina">
+  <div class="form-group">
+    <label>Nome</label>
+    <input class="form-control" name="nome" #name="ngModel" [(ngModel)]="disciplinaService.disciplinaSelecionada.nome" placeholder="Informe o nome" required>
+  </div>
+  <div class="form-group">
+    <label>Média</label>
+    <input class="form-control" name="media" #position="ngModel" [(ngModel)]="disciplinaService.disciplinaSelecionada.media" placeholder="Informe a média" required>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-success" type="submit" [disabled]="!disciplinaForm.valid">
+      <i class="fa fa-check"></i>
+       Cadastrar
+    </button>
+    <button class="btn btn-default" type="button" (click)="resetarFormulario(disciplinaForm)">
+      <i class="fa fa-tr"></i>
+       Limpar
+    </button>
+  </div>
+</form>

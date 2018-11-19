@@ -1,0 +1,14 @@
+<h6 class="text-center">Criar sala de aula</h6><br/>
+<form #salaForm="ngForm" (ngSubmit)="submitarFormulario(salaForm)">
+    <input type="hidden" name="$codigoSala" #$key="ngModel" [(ngModel)]="salaService.salaSelecionada.$codigoSala">
+  <div class="form-group">
+    <button class="btn btn-success" type="submit" [disabled]="!salaForm.valid">
+      <i class="fa fa-check"></i>
+       Cadastrar
+    </button>
+    <button class="btn btn-default" type="button" (click)="resetarFormulario(salaForm)">
+      <i class="fa fa-tr"></i>
+       Limpar
+    </button>
+  </div>
+</form>

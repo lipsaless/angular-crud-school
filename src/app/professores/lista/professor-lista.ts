@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./professor-lista.css']
 })
 export class ProfessorListaComponent implements OnInit {
-  employeeList: Professor[];
+  professoresLista: Professor[];
   constructor(
     private professorService: ProfessorService, private tostr: ToastrService
   ) { }
@@ -18,11 +18,11 @@ export class ProfessorListaComponent implements OnInit {
   ngOnInit() {
     const x = this.professorService.getData();
     x.snapshotChanges().subscribe(item => {
-      this.employeeList = [];
+      this.professoresLista = [];
       item.forEach(element => {
         const y = element.payload.toJSON();
         y['$codigoProfessor'] = element.key;
-        this.employeeList.push(y as Professor);
+        this.professoresLista.push(y as Professor);
       });
     });
   }

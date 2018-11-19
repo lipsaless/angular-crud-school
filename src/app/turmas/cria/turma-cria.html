@@ -1,0 +1,24 @@
+<form #turmaForm="ngForm" (ngSubmit)="submitarFormulario(turmaForm)">
+    <input type="hidden" name="$codigoTurma" #$key="ngModel" [(ngModel)]="turmaService.turmaSelecionada.$click">
+  <div class="form-group">
+    <label>Nome</label>
+    <input class="form-control" name="nome" #name="ngModel" [(ngModel)]="turmaService.turmaSelecionada.nome" placeholder="Informe o nome" required>
+  </div>
+  <div class="form-group">
+    <label>Professor</label>
+    <select name="" id="" class="form-group">
+      <option *ngIf="listaProfessores.length == 0"><i>Nenhum professor cadastrado</i></option>
+      <!-- <option *ngFor="let p of listaProfessores" value=""> { }} </option> -->
+    </select>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-success" type="submit" [disabled]="!turmaForm.valid">
+      <i class="fa fa-check"></i>
+       Cadastrar
+    </button>
+    <button class="btn btn-default" type="button" (click)="resetarFormulario(turmaForm)">
+      <i class="fa fa-tr"></i>
+       Limpar
+    </button>
+  </div>
+</form>
