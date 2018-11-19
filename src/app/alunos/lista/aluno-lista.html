@@ -1,0 +1,26 @@
+<h6 class="text-center">Lista de alunos</h6><br/>
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Sobrenome</th>
+      <th>Idade</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let a of alunosLista">
+      <td> {{ a.nome }} </td>
+      <td> {{ a.sobrenome }} </td>
+      <td> {{ a.idade }} </td>
+      <td>
+        <button class="btn btn-primary" (click)="editaAluno(a)">
+          <i class="fa fa-pencil"></i>
+        </button>
+        <button class="btn btn-danger" (click)="deletaAluno(a.$codigo)">
+          <i class="fa fa-trash-o"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

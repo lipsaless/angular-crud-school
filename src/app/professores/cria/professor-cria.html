@@ -1,0 +1,25 @@
+<form #professorForm="ngForm" (ngSubmit)="submitarFormulario(professorForm)">
+    <input type="hidden" name="$codigoProfessor" #$key="ngModel" [(ngModel)]="professorService.professorSelecionado.$codigoProfessor">
+  <div class="form-group">
+    <label>Nome</label>
+    <input class="form-control" name="nome" #name="ngModel" [(ngModel)]="professorService.professorSelecionado.nome" placeholder="Informe o nome" required>
+  </div>
+  <div class="form-group">
+    <label>Sobrenome</label>
+    <input class="form-control" name="sobrenome" #position="ngModel" [(ngModel)]="professorService.professorSelecionado.sobrenome" placeholder="Informe o sobrenome" required>
+  </div>
+  <div class="form-group">
+    <label>Idade</label>
+    <input class="form-control" name="idade" #office="ngModel" [(ngModel)]="professorService.professorSelecionado.idade" placeholder="Informe a idade" required>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-default" type="submit" [disabled]="!professorForm.valid">
+      <i class="fa fa-check"></i>
+       Cadastrar
+      </button>
+    <button class="btn btn-default" type="button" (click)="resetarFormulario(professorForm)">
+      <i class="fa fa-tr"></i>
+       Limpar
+      </button>
+  </div>
+</form>

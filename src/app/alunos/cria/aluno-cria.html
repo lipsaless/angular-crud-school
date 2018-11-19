@@ -1,0 +1,26 @@
+<h6 class="text-center">Cadastrar aluno</h6><br/>
+<form #alunoForm="ngForm" (ngSubmit)="submitarFormulario(alunoForm)">
+    <input type="hidden" name="$codigo" #$key="ngModel" [(ngModel)]="alunoService.alunoSelecionado.$codigo">
+  <div class="form-group">
+    <label>Nome *</label>
+    <input class="form-control" name="nome" #name="ngModel" [(ngModel)]="alunoService.alunoSelecionado.nome" placeholder="Informe o nome" required>
+  </div>
+  <div class="form-group">
+    <label>Sobrenome *</label>
+    <input class="form-control" name="sobrenome" #position="ngModel" [(ngModel)]="alunoService.alunoSelecionado.sobrenome" placeholder="Informe o sobrenome" required>
+  </div>
+  <div class="form-group">
+    <label>Idade *</label>
+    <input class="form-control" name="idade" #office="ngModel" [(ngModel)]="alunoService.alunoSelecionado.idade" placeholder="Informe a idade" required>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-default" type="submit" [disabled]="!alunoForm.valid">
+      <i class="fa fa-check"></i>
+       {{ nameButtonSave }}
+      </button>
+    <button class="btn btn-default" type="button" (click)="resetarFomulario(alunoForm)">
+      <i class="fa fa-repeat"></i>
+       Limpar
+      </button>
+  </div>
+</form>
