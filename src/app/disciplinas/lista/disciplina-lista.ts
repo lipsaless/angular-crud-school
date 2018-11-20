@@ -12,8 +12,10 @@ import { ToastrService } from 'ngx-toastr';
 export class DisciplinaListaComponent implements OnInit {
   disciplinasLista: Disciplina[];
   constructor(
-    private disciplinaService: DisciplinaService, private tostr: ToastrService
-  ) { }
+    private disciplinaService: DisciplinaService,
+    private tostr: ToastrService
+  ) {
+   }
 
   ngOnInit() {
     const x = this.disciplinaService.getData();
@@ -21,10 +23,12 @@ export class DisciplinaListaComponent implements OnInit {
       this.disciplinasLista = [];
       item.forEach(element => {
         const y = element.payload.toJSON();
-        y['$codigoProfessor'] = element.key;
+        y['$codigoDisciplina'] = element.key;
         this.disciplinasLista.push(y as Disciplina);
       });
     });
+
+    console.log(this.disciplinasLista);
   }
 
   editarDisciplina(disciplina: Disciplina) {
@@ -33,7 +37,7 @@ export class DisciplinaListaComponent implements OnInit {
 
   deletarDisciplina(codigoDisciplina: string) {
     if (confirm('Deseja realmente excluir este registro?') === true) {
-      this.disciplinaService.deletarProfessor(codigoDisciplina);
+      this.disciplinaService.deletarDisciplina(codigoDisciplina);
       this.tostr.warning('Registro deletado.');
     }
   }

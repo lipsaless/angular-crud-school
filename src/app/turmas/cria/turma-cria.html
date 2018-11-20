@@ -1,14 +1,23 @@
 <form #turmaForm="ngForm" (ngSubmit)="submitarFormulario(turmaForm)">
-    <input type="hidden" name="$codigoTurma" #$key="ngModel" [(ngModel)]="turmaService.turmaSelecionada.$click">
+    <input type="hidden" name="$codigoTurma" #$key="ngModel" [(ngModel)]="turmaService.turmaSelecionada.$codigoTurma">
   <div class="form-group">
     <label>Nome</label>
-    <input class="form-control" name="nome" #name="ngModel" [(ngModel)]="turmaService.turmaSelecionada.nome" placeholder="Informe o nome" required>
+    <input class="form-control" name="nome" #name="ngModel" [(ngModel)]="turmaService.turmaSelecionada.nome" placeholder="Informe o nome da turma" required>
   </div>
   <div class="form-group">
-    <label>Professor</label>
-    <select name="" id="" class="form-group">
-      <option *ngIf="listaProfessores.length == 0"><i>Nenhum professor cadastrado</i></option>
-      <!-- <option *ngFor="let p of listaProfessores" value=""> { }} </option> -->
+    <label>Professor da turma *</label>
+    <select name="professorId" [(ngModel)]="turmaService.turmaSelecionada.professorId" class="form-control">
+      <option value="" selected> Selecione </option>
+      <!-- <option *ngIf="listaProfessores.length == 0"><i>Nenhum professor cadastrado</i></option> -->
+      <option *ngFor="let p of listaProfessores" value="{{ p.$codigoProfessor }}"> {{ p.nome }} </option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Disciplina da turma *</label>
+    <select name="disciplinaId" [(ngModel)]="turmaService.turmaSelecionada.disciplinaId" class="form-control">
+      <option value="" selected> Selecione </option>
+      <!-- <option *ngIf="listaProfessores.length == 0"><i>Nenhum professor cadastrado</i></option> -->
+      <option *ngFor="let d of listaDisciplinas" value="{{ d.$codigoDisciplina }}"> {{ d.nome }} </option>
     </select>
   </div>
   <div class="form-group">

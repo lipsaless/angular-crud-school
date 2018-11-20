@@ -17,21 +17,21 @@ export class ProfessorCriaComponent implements OnInit {
 
   ngOnInit() {
 
-    this.resetarFormulário();
+    this.resetarFormulario();
   }
 
-  submitarFormulário(professorForm: NgForm) {
-    if (professorForm.value.$key == null) {
+  submitarFormulario(professorForm: NgForm) {
+    if (professorForm.value.$codigoProfessor == null) {
       this.professorService.inserirProfessor(professorForm.value);
       this.tostr.success('Professor salvo com sucesso.');
     } else {
       this.professorService.alterarProfessor(professorForm.value);
       this.tostr.success('Alteração salva.');
     }
-    this.resetarFormulário(professorForm);
+    this.resetarFormulario(professorForm);
   }
 
-  resetarFormulário(professorForm?: NgForm) {
+  resetarFormulario(professorForm?: NgForm) {
     professorForm.reset();
     this.professorService.professorSelecionado = {
       $codigoProfessor: null,

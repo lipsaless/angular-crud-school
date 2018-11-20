@@ -1,0 +1,9 @@
+.mat-tab-body {
+    transition: none !important;
+    transform: none !important;
+}
+
+.mat-tab-body-content {
+    transition: none !important;
+    transform: none !important;
+}

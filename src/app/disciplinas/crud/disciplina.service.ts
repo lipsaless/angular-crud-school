@@ -16,14 +16,18 @@ export class DisciplinaService {
     return this.disciplinasLista;
   }
 
-  inserirProfessor(disciplina: Disciplina) {
+  disciplinaById(idDisciplina) {
+    return this.firebase.database.ref('/Disciplina/' + idDisciplina).once('value');
+  }
+
+  inserirDisciplina(disciplina: Disciplina) {
     this.disciplinasLista.push({
       nome: disciplina.nome,
-      sobrenome: disciplina.media,
+      media: disciplina.media,
     });
   }
 
-  alterarProfessor(disciplina: Disciplina) {
+  alterarDisciplina(disciplina: Disciplina) {
     this.disciplinasLista.update(disciplina.$codigoDisciplina,
       {
         nome: disciplina.nome,
@@ -31,7 +35,7 @@ export class DisciplinaService {
       });
   }
 
-  deletarProfessor($codigoDisciplina: string) {
+  deletarDisciplina($codigoDisciplina: string) {
     this.disciplinasLista.remove($codigoDisciplina);
   }
 

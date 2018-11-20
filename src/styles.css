@@ -22,3 +22,7 @@ mat-tab-body .mat-tab-body-content {
 .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
     background-color: black !important;
 }
+
+.alert.flash-message {
+    margin-top: 10px;
+}

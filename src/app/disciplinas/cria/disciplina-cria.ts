@@ -12,26 +12,26 @@ import { ToastrService } from 'ngx-toastr';
 export class DisciplinaCriaComponent implements OnInit {
 
   constructor(
-    private disciplinaService: DisciplinaService, private tostr: ToastrService
+    private disciplinaService: DisciplinaService,
+    private tostr: ToastrService
   ) { }
 
   ngOnInit() {
-
-    this.resetarFormulário();
+    this.resetarFormulario();
   }
 
-  submitarFormulário(disciplinaForm: NgForm) {
-    if (disciplinaForm.value.$key == null) {
-      this.disciplinaService.inserirProfessor(disciplinaForm.value);
+  submitarFormulario(disciplinaForm: NgForm) {
+    if (disciplinaForm.value.$codigoDisciplina == null) {
+      this.disciplinaService.inserirDisciplina(disciplinaForm.value);
       this.tostr.success('Disciplina salva com sucesso.');
     } else {
-      this.disciplinaService.alterarProfessor(disciplinaForm.value);
+      this.disciplinaService.alterarDisciplina(disciplinaForm.value);
       this.tostr.success('Alteração salva.');
     }
-    this.resetarFormulário(disciplinaForm);
+    this.resetarFormulario(disciplinaForm);
   }
 
-  resetarFormulário(disciplinaForm?: NgForm) {
+  resetarFormulario(disciplinaForm?: NgForm) {
     disciplinaForm.reset();
     this.disciplinaService.disciplinaSelecionada = {
       $codigoDisciplina: null,

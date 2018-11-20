@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -38,7 +39,21 @@ import { AppRouter } from './app.routes';
 
 // material angular
 import { MatTabsModule } from '@angular/material';
+import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+
 import { TabsComponent } from './tabs/tabs.component';
+import { HomeComponent } from './home/home.component';
+import { NavComponent } from './nav/nav.component';
+import { RegistrarComponent } from './registrar/registrar.component';
+import { LoginComponent } from './login/login.component';
+import { PaginaNotFoundComponent } from './pagina-not-found/pagina-not-found.component';
+
+import { AuthService } from './auth.service';
+
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @NgModule({
   declarations: [
@@ -58,21 +73,33 @@ import { TabsComponent } from './tabs/tabs.component';
     SalaComponent,
     SalaCriaComponent,
     SalaListaComponent,
-    TabsComponent
+    TabsComponent,
+    HomeComponent,
+    NavComponent,
+    RegistrarComponent,
+    LoginComponent,
+    PaginaNotFoundComponent
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     FormsModule,
     ToastrModule.forRoot(),
     AppRouter,
     MatTabsModule,
-    BrowserAnimationsModule
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    FlashMessagesModule
   ],
   providers: [
     ProfessorService,
-    DisciplinaService
+    DisciplinaService,
+    AuthService,
+    FlashMessagesService
   ],
   bootstrap: [AppComponent]
 })

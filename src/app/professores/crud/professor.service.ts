@@ -6,6 +6,7 @@ import { Professor } from './professor.model';
 @Injectable()
 export class ProfessorService {
   professoresLista: AngularFireList<any>;
+  professorDados: any;
   professorSelecionado: Professor = new Professor();
   constructor(
     private firebase: AngularFireDatabase
@@ -14,6 +15,10 @@ export class ProfessorService {
   getData() {
     this.professoresLista = this.firebase.list('Professor');
     return this.professoresLista;
+  }
+  
+  professorById(idProfessor) {
+    return this.firebase.database.ref('/Professor/' + idProfessor).once('value');
   }
 
   inserirProfessor(professor: Professor) {

@@ -1,15 +1,23 @@
 <h6 class="text-center">Lista de disciplinas</h6><br/>
-<table class="table table-sm table-hover">
-  <tr *ngFor="let d of disciplinasLista">
-      <td> {{ d.nome }} </td>
-      <td> {{ d.media }} </td>
-      <td>
-        <button class="btn btn-primary" (click)="editarDisciplina(d)">
-          <i class="fa fa-pencil"></i>
-        </button>
-        <button class="btn btn-danger" (click)="deletarDisciplina(d.$codigoDisciplina)">
-          <i class="fa fa-trash-o"></i>
-        </button>
-      </td>
-  </tr>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Média</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let d of disciplinasLista">
+        <td> {{ d.nome }} </td>
+        <td> {{ d.media }} </td>
+        <td>
+          <button class="btn btn-primary" (click)="editarDisciplina(d)">
+            <i class="fa fa-pencil"></i>
+          </button>
+          <button class="btn btn-danger" (click)="deletarDisciplina(d.$codigoDisciplina)">
+            <i class="fa fa-trash-o"></i>
+          </button>
+        </td>
+    </tr>
+  </tbody>
 </table>

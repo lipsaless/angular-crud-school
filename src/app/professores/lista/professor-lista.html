@@ -1,16 +1,25 @@
 <h6 class="text-center">Lista de professores</h6><br/>
-<table class="table table-sm table-hover">
-  <tr *ngFor="let p of professoresLista">
-      <td> {{ p.nome }} </td>
-      <td> {{ p.sobrenome }} </td>
-      <td> {{ p.idade }} </td>
-      <td>
-        <button class="btn btn-primary" (click)="editarProfessor(p)">
-          <i class="fa fa-pencil"></i>
-        </button>
-        <button class="btn btn-danger" (click)="deletarProfessor(p.$codigoProfessor)">
-          <i class="fa fa-trash-o"></i>
-        </button>
-      </td>
-  </tr>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Sobrenome</th>
+      <th>Idade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of professoresLista">
+        <td> {{ p.nome }} </td>
+        <td> {{ p.sobrenome }} </td>
+        <td> {{ p.idade }} </td>
+        <td>
+          <button class="btn btn-primary" (click)="editarProfessor(p)">
+            <i class="fa fa-pencil"></i>
+          </button>
+          <button class="btn btn-danger" (click)="deletarProfessor(p.$codigoProfessor)">
+            <i class="fa fa-trash-o"></i>
+          </button>
+        </td>
+    </tr>
+  </tbody>
 </table>

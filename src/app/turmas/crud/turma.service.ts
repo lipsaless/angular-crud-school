@@ -18,14 +18,18 @@ export class TurmaService {
 
   inserirTurma(turma: Turma) {
     this.turmasLista.push({
-      nome: turma.nome
+      nome: turma.nome,
+      professorId: turma.professorId,
+      disciplinaId: turma.disciplinaId
     });
   }
 
   alterarTurma(turma: Turma) {
     this.turmasLista.update(turma.$codigoTurma,
       {
-        nome: turma.nome
+        nome: turma.nome,
+        professorId: turma.professorId,
+        disciplinaId: turma.disciplinaId
       });
   }
 

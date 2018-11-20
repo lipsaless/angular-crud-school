@@ -1,1 +1,6 @@
-<app-tabs></app-tabs>
+<!-- <app-tabs></app-tabs> -->
+<app-nav (logged)="logado($event)"></app-nav>
+<app-tabs *ngIf="isLogged"></app-tabs>
+
+<app-registrar *ngIf="!isLogged && isRegistro()" (logged)="logado($event)"></app-registrar>
+<app-login *ngIf="!isLogged && isLogin()" (logged)="logado($event)"></app-login>
