@@ -15,20 +15,10 @@ export class DisciplinaListaComponent implements OnInit {
     private disciplinaService: DisciplinaService,
     private tostr: ToastrService
   ) {
+    this.listaDisciplinas();
    }
 
   ngOnInit() {
-    const x = this.disciplinaService.getData();
-    x.snapshotChanges().subscribe(item => {
-      this.disciplinasLista = [];
-      item.forEach(element => {
-        const y = element.payload.toJSON();
-        y['$codigoDisciplina'] = element.key;
-        this.disciplinasLista.push(y as Disciplina);
-      });
-    });
-
-    console.log(this.disciplinasLista);
   }
 
   editarDisciplina(disciplina: Disciplina) {
@@ -38,8 +28,19 @@ export class DisciplinaListaComponent implements OnInit {
   deletarDisciplina(codigoDisciplina: string) {
     if (confirm('Deseja realmente excluir este registro?') === true) {
       this.disciplinaService.deletarDisciplina(codigoDisciplina);
-      this.tostr.warning('Registro deletado.');
+      this.tostr.success('Registro deletado.');
     }
   }
 
+  listaDisciplinas() {
+    const x = this.disciplinaService.getData();
+    x.snapshotChanges().subscribe(item => {
+      this.disciplinasLista = [];
+      item.forEach(element => {
+        const y = element.payload.toJSON();
+        y['$codigoDisciplina'] = element.key;
+        this.disciplinasLista.push(y as Disciplina);
+      });
+    });
+  }
 }

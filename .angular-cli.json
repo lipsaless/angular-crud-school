@@ -21,10 +21,17 @@
       "styles": [
         "styles.css",
         "../node_modules/ngx-toastr/toastr.css",
-        "../src/components/bootstrap/css/bootstrap.min.css"
+        "../src/components/bootstrap/css/bootstrap.min.css",
+        "../src/components/semantic-ui/dist/semantic.min.css",
+        "../node_modules/bootstrap-select/dist/css/bootstrap-select.min.css",
+        "../node_modules/angular-multiple-select/build/multiple-select.min.css"
       ],
       "scripts": [
-        "../src/components/bootstrap/js/bootstrap.min.js"
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../src/components/bootstrap/js/bootstrap.min.js",
+        "../src/components/semantic-ui/dist/semantic.min.js",
+        "../node_modules/bootstrap-select/dist/js/bootstrap-select.min.js",
+        "../node_modules/angular-multiple-select/build/multiple-select.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

@@ -13,6 +13,7 @@ import { environment } from '../environments/environment';
 import { AlunosComponent } from './alunos/alunos';
 import { AlunoCriaComponent } from './alunos/cria/aluno-cria';
 import { AlunoListaComponent } from './alunos/lista/aluno-lista';
+import { AlunoService } from './alunos/crud/aluno.service';
 // professores
 import { ProfessoresComponent } from './professores/professores';
 import { ProfessorCriaComponent } from './professores/cria/professor-cria';
@@ -27,6 +28,7 @@ import { DisciplinaService } from './disciplinas/crud/disciplina.service';
 import { TurmasComponent } from './turmas/turmas';
 import { TurmaCriaComponent } from './turmas/cria/turma-cria';
 import { TurmaListaComponent } from './turmas/lista/turma-lista';
+import { TurmaService } from './turmas/crud/turma.service';
 // Sala de aula
 import { SalaComponent } from './sala-de-aula/sala-de-aula';
 import { SalaCriaComponent } from './sala-de-aula/cria/sala-de-aula-cria';
@@ -54,6 +56,9 @@ import { AuthService } from './auth.service';
 
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { FlashMessagesService } from 'angular2-flash-messages';
+
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 @NgModule({
   declarations: [
@@ -86,20 +91,24 @@ import { FlashMessagesService } from 'angular2-flash-messages';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FormsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({ positionClass: 'toast-top-center', progressBar: true }),
     AppRouter,
     MatTabsModule,
     MatTableModule,
     MatButtonModule,
     MatIconModule,
     BrowserAnimationsModule,
-    FlashMessagesModule
+    FlashMessagesModule,
+    MultiselectDropdownModule,
+    AngularFirestoreModule
   ],
   providers: [
     ProfessorService,
     DisciplinaService,
     AuthService,
-    FlashMessagesService
+    FlashMessagesService,
+    AlunoService,
+    TurmaService
   ],
   bootstrap: [AppComponent]
 })

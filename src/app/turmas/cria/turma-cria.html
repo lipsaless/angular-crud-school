@@ -31,3 +31,50 @@
     </button>
   </div>
 </form>
+
+<table class="ui very basic table" *ngIf="turmaService.turmaSelecionada.$codigoTurma">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Sobrenome</th>
+      <th>Idade</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let a of listaAlunos">
+      <td> {{ a.nome }} </td>
+      <td> {{ a.sobrenome }} </td>
+      <td> {{ a.idade }} </td>
+      <td class="right aligned">
+        <span *ngIf="isAlocado(a.$codigoAluno)">Alocado</span>
+        <button *ngIf="!isAlocado(a.$codigoAluno)" class="ui green button" (click)="alocarAluno(a, turmaService.turmaSelecionada.$codigoTurma)">
+          <i class="fa fa-arrow-right"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- <table class="ui very basic table" *ngIf="turmaService.turmaSelecionada.$codigoTurma">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>Idade</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let a of turmaService.turmaSelecionada.listaAlunos">
+        <td> {{ a.nome }} </td>
+        <td> {{ a.sobrenome }} </td>
+        <td> {{ a.idade }} </td>
+        <td class="right aligned">
+          <button class="ui green button" (click)="alocarAluno(a, turmaService.turmaSelecionada.$codigoTurma)">
+            <i class="fa fa-pencil"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table> -->

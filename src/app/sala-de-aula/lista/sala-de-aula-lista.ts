@@ -34,7 +34,7 @@ export class SalaListaComponent implements OnInit {
   deletarDisciplina(codigoSala: string) {
     if (confirm('Deseja realmente excluir este registro?') === true) {
       this.salaService.deletarSala(codigoSala);
-      this.tostr.warning('Registro deletado.');
+      this.tostr.success('Registro deletado.');
     }
   }
 

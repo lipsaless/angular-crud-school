@@ -1,13 +1,18 @@
 <h6 class="text-center">Salas de aula</h6><br/>
-<table class="table ">
+<table class="ui very basic table">
+  <thead>
+    <tr>
+      <th>Sala</th>
+      <th></th>
+    </tr>
+  </thead>
   <tr *ngFor="let s of salasLista">
-      <!-- <td> {{ s.nome }} </td>
-      <td> {{ s.media }} </td> -->
-      <td>
-        <button class="btn btn-primary" (click)="editarSala(s)">
+      <td> {{ s.nome }} </td>
+      <td class="right aligned">
+        <button class="ui blue button" (click)="editarSala(s)">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="btn btn-danger" (click)="deletarSala(s.$codigoSala)">
+        <button class="ui red button" (click)="deletarSala(s.$codigoSala)">
           <i class="fa fa-trash-o"></i>
         </button>
       </td>

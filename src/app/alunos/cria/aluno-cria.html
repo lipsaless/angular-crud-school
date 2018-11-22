@@ -1,6 +1,6 @@
 <h6 class="text-center">Cadastrar aluno</h6><br/>
 <form #alunoForm="ngForm" (ngSubmit)="submitarFormulario(alunoForm)">
-    <input type="hidden" name="$codigo" #$key="ngModel" [(ngModel)]="alunoService.alunoSelecionado.$codigo">
+    <input #idAluno type="hidden" name="$codigo" #$key="ngModel" [(ngModel)]="alunoService.alunoSelecionado.$codigo">
   <div class="form-group">
     <label>Nome *</label>
     <input class="form-control" name="nome" #name="ngModel" [(ngModel)]="alunoService.alunoSelecionado.nome" placeholder="Informe o nome" required>
@@ -21,6 +21,6 @@
     <button class="btn btn-default" type="button" (click)="resetarFomulario(alunoForm)">
       <i class="fa fa-repeat"></i>
        Limpar
-      </button>
+    </button>
   </div>
 </form>

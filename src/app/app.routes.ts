@@ -15,7 +15,6 @@ import { PaginaNotFoundComponent } from './pagina-not-found/pagina-not-found.com
 
 const routes: Routes = [
     { path: '', redirectTo: '/registro', pathMatch: 'full' },
-    // { path: 'home', component: AppComponent },
     { path: 'login', component: LoginComponent },
     { path: 'registro', component: RegistrarComponent },
     { path: 'home', component: HomeComponent },
@@ -23,7 +22,7 @@ const routes: Routes = [
     { path: 'professores', component: ProfessoresComponent },
     { path: 'disciplinas', component: DisciplinasComponent },
     { path: 'turmas', component: TurmasComponent },
-    { path: 'criar-sala', component: SalaComponent },
+    // { path: 'criar-sala', component: SalaComponent },
     { path: '**', component: PaginaNotFoundComponent }
 ];
 

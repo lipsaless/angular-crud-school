@@ -1,20 +1,21 @@
 <h6 class="text-center">Lista de disciplinas</h6><br/>
-<table class="table">
+<table class="ui very basic table">
   <thead>
     <tr>
       <th>Nome</th>
       <th>Média</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let d of disciplinasLista">
         <td> {{ d.nome }} </td>
         <td> {{ d.media }} </td>
-        <td>
-          <button class="btn btn-primary" (click)="editarDisciplina(d)">
+        <td class="right aligned">
+          <button class="ui blue button" (click)="editarDisciplina(d)">
             <i class="fa fa-pencil"></i>
           </button>
-          <button class="btn btn-danger" (click)="deletarDisciplina(d.$codigoDisciplina)">
+          <button class="ui red button" (click)="deletarDisciplina(d.$codigoDisciplina)">
             <i class="fa fa-trash-o"></i>
           </button>
         </td>

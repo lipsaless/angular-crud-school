@@ -4,16 +4,33 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav mr-auto" *ngIf="logado">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/alunos">Alunos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/professores">Professores</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/disciplinas">Disciplinas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/turmas">Turmas</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLink="/criar-sala">Sala de aula</a>
+        </li> -->
       </ul>
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item" *ngIf="!logado">
+      <ul class="navbar-nav mx-auto" *ngIf="!logado">
+        <li class="nav-item">
           <a class="nav-link" routerLink="/login">Login</a>
         </li>
-        <li class="nav-item" *ngIf="!logado">
+        <li class="nav-item">
           <a class="nav-link" routerLink="/registro">Registrar-se</a>
         </li>
-        <li class="nav-item" *ngIf="logado">
+      </ul>
+      <ul class="navbar-nav mx-auto" *ngIf="logado">
+        <li class="nav-item">
           <a class="nav-link" (click)="sair()">Sair</a>
         </li>
       </ul>

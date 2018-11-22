@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AlunoService } from '../crud/aluno.service';
@@ -9,16 +9,23 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./aluno-cria.css']
 })
 export class AlunoCriaComponent implements OnInit {
-  nameButtonSave: String = 'Cadastrar';
+  nameButtonSave: String = 'Salvar';
+  @ViewChild('idAluno') idAluno: ElementRef;
 
-  constructor(private alunoService: AlunoService, private tostr: ToastrService) { }
+  constructor(private alunoService: AlunoService, private tostr: ToastrService) {
+    // if (this.idAluno.nativeElement.$codigo === null) {
+    //   this.nameButtonSave = 'Cadastrar';
+    // } else {
+    //   this.nameButtonSave = 'Salvar alterações';
+    // }
+  }
 
   ngOnInit() {
-
     this.resetarFomulario();
   }
 
   submitarFormulario(alunoForm: NgForm) {
+    console.log(alunoForm);
     // se não tiver id do aluno será um novo cadastro
     if (alunoForm.value.$codigo == null) {
       // insere e retorna mensagem

@@ -12,17 +12,17 @@ mat-tab-body .mat-tab-body-content {
     overflow-y: hidden;
 }
 
-.mat-tab-body-content .jumbotron {
+.text-center .jumbotron {
     background-color: #ff0000;
     color:white;
     border-radius: 0;
     padding: 1rem;
 }
 
-.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+/* .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
     background-color: black !important;
-}
+} */
 
-.alert.flash-message {
+/* .alert.flash-message {
     margin-top: 10px;
-}
+} */

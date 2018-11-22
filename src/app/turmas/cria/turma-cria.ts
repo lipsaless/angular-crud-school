@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { TurmaService } from '../crud/turma.service';
 import { ToastrService } from 'ngx-toastr';
+import { AlunoService } from '../../alunos/crud/aluno.service';
 
 import { ProfessorService } from '../../professores/crud/professor.service';
 import { DisciplinaService } from '../../disciplinas/crud/disciplina.service';
 import { Professor } from '../../professores/crud/professor.model';
+import { Aluno } from '../../alunos/crud/aluno.model';
 
 @Component({
   selector: 'app-turma-cria',
@@ -16,15 +18,29 @@ import { Professor } from '../../professores/crud/professor.model';
 export class TurmaCriaComponent implements OnInit {
   listaProfessores: any;
   listaDisciplinas: any;
+  listaAlunos: any;
+  isEdicao = false;
+  // @ViewChild('idTurma') idTurma: ElementRef;
 
   constructor(
     private turmaService: TurmaService,
     private tostr: ToastrService,
     private professorService: ProfessorService,
-    private disciplinaService: DisciplinaService
+    private disciplinaService: DisciplinaService,
+    private alunoService: AlunoService
   ) { 
     this.listaProfessores = professorService.getData();
     this.listaDisciplinas = disciplinaService.getData();
+
+    const dadosAluno = this.alunoService.getData();
+    dadosAluno.snapshotChanges().subscribe(item => {
+      this.listaAlunos = [];
+      item.forEach(element => {
+        const dadosAlunoJson = element.payload.toJSON();
+        dadosAlunoJson['$codigoAluno'] = element.key;
+        this.listaAlunos.push(dadosAlunoJson as Aluno);
+      });
+    });
 
     const dadosProfessor = this.professorService.getData();
     dadosProfessor.snapshotChanges().subscribe(item => {
@@ -68,8 +84,23 @@ export class TurmaCriaComponent implements OnInit {
       $codigoTurma: null,
       nome: '',
       professorId: null,
-      disciplinaId: null
+      disciplinaId: null,
+      listaAlunos: null
     };
+  }
+
+  isAlocado(alunoId) {
+    const listaDaTurma = this.turmaService.turmaSelecionada.listaAlunos;
+    if (listaDaTurma.indexOf(alunoId) !== -1) {
+      return true;
+    }
+    return false;
+  }
+
+  alocarAluno(aluno: any, idTurma) {
+    const alunoId = aluno.$codigoAluno;
+    this.turmaService.alocarAlunoTurma(alunoId, idTurma);
+    this.turmaService.turmaSelecionada.listaAlunos.push(aluno.$codigoAluno);
   }
 
 }

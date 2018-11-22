@@ -32,5 +32,8 @@ export class LoginComponent implements OnInit {
       this.angularRouter.navigate(['/login']);
     });
   }
-
+  
+  logarComGoogle() {
+    this.authService.logarGoogle();
+  }
 }

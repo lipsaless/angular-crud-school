@@ -13,9 +13,25 @@ export class AlunoListaComponent implements OnInit {
   alunosLista: Aluno[];
   constructor(
     private alunoService: AlunoService, private tostr: ToastrService
-  ) { }
+  ) {
+    this.listaAlunos();
+   }
 
   ngOnInit() {
+  }
+
+  editaAluno(aluno: Aluno) {
+    this.alunoService.alunoSelecionado = Object.assign({}, aluno);
+  }
+
+  deletaAluno(codigo: string) {
+    if (confirm('Deseja realmente excluir este registro?') === true) {
+      this.alunoService.deletaAluno(codigo);
+      this.tostr.success('Aluno deletado.');
+    }
+  }
+
+  listaAlunos() {
     const x = this.alunoService.getData();
     x.snapshotChanges().subscribe(item => {
       this.alunosLista = [];
@@ -26,16 +42,4 @@ export class AlunoListaComponent implements OnInit {
       });
     });
   }
-
-  editaAluno(aluno: Aluno) {
-    this.alunoService.alunoSelecionado = Object.assign({}, aluno);
-  }
-
-  deletaAluno(codigo: string) {
-    if (confirm('Deseja realmente excluir este registro?') === true) {
-      this.alunoService.deletaAluno(codigo);
-      this.tostr.warning('Aluno deletado.');
-    }
-  }
-
 }

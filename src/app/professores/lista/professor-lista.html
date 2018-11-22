@@ -1,10 +1,11 @@
 <h6 class="text-center">Lista de professores</h6><br/>
-<table class="table">
+<table class="ui very basic table">
   <thead>
     <tr>
       <th>Nome</th>
       <th>Sobrenome</th>
       <th>Idade</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -12,11 +13,11 @@
         <td> {{ p.nome }} </td>
         <td> {{ p.sobrenome }} </td>
         <td> {{ p.idade }} </td>
-        <td>
-          <button class="btn btn-primary" (click)="editarProfessor(p)">
+        <td class="right aligned">
+          <button class="ui blue button" (click)="editarProfessor(p)">
             <i class="fa fa-pencil"></i>
           </button>
-          <button class="btn btn-danger" (click)="deletarProfessor(p.$codigoProfessor)">
+          <button class="ui red button" (click)="deletarProfessor(p.$codigoProfessor)">
             <i class="fa fa-trash-o"></i>
           </button>
         </td>

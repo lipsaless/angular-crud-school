@@ -1,6 +1,25 @@
 <h6 class="text-center">Criar sala de aula</h6><br/>
 <form #salaForm="ngForm" (ngSubmit)="submitarFormulario(salaForm)">
-    <input type="hidden" name="$codigoSala" #$key="ngModel" [(ngModel)]="salaService.salaSelecionada.$codigoSala">
+  <input type="hidden" name="$codigoSala" #$key="ngModel" [(ngModel)]="salaService.salaSelecionada.$codigoSala">
+  <div class="form-group">
+    <div class="form-group">
+      <label>Turma *</label>
+      <select name="turmaId" [(ngModel)]="salaService.salaSelecionada.turmaId" class="form-control">
+        <option value="" selected> Selecione </option>
+        <!-- <option *ngIf="listaProfessores.length == 0"><i>Nenhum professor cadastrado</i></option> -->
+        <option *ngFor="let t of listaTurmas" value="{{ t.$codigoTurma }}"> {{ t.nome }} </option>
+      </select>
+    </div>
+    <label>Alunos *</label>
+    <select name="alunoId" multiple="" [(ngModel)]="salaService.salaSelecionada.alunoId" class="selectpicker show-menu-arrow form-control">
+      <!-- <option *ngIf="listaProfessores.length == 0"><i>Nenhum professor cadastrado</i></option> -->
+      <option *ngFor="let a of listaAlunos" value="{{ a.$codigo }}"> {{ a.nome }} </option>
+    </select>
+  </div>
+  <div class="form-group">
+    <ss-multiselect-dropdown [options]="myOptions" [(ngModel)]="optionsModel" (ngModelChange)="onChange($event)"></ss-multiselect-dropdown>
+
+  </div>
   <div class="form-group">
     <button class="btn btn-success" type="submit" [disabled]="!salaForm.valid">
       <i class="fa fa-check"></i>

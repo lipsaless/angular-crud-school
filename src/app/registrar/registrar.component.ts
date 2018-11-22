@@ -3,6 +3,8 @@ import { AuthService } from '../auth.service';
 import { Router as AngularRouter } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-registrar',
   templateUrl: './registrar.component.html',
@@ -18,7 +20,8 @@ export class RegistrarComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private angularRouter: AngularRouter,
-    private message: FlashMessagesService
+    private message: FlashMessagesService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -33,6 +36,7 @@ export class RegistrarComponent implements OnInit {
     }).catch((err) => {
       console.log('Erro ao inserir usuário');
       console.log(err);
+      this.toastr.warning(err.message);
     });
   }
 }

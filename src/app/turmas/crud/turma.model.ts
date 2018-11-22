@@ -3,4 +3,5 @@ export class Turma {
     nome: string;
     professorId: string;
     disciplinaId: string;
+    listaAlunos: Array<any>;
 }

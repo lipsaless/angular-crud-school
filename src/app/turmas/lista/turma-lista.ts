@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { TurmaService } from '../crud/turma.service';
 import { ProfessorService } from '../../professores/crud/professor.service';
 import { DisciplinaService } from '../../disciplinas/crud/disciplina.service';
+import { AlunoService } from '../../alunos/crud/aluno.service';
 
 import { Turma } from '../crud/turma.model';
 import { ToastrService } from 'ngx-toastr';
@@ -19,23 +20,11 @@ export class TurmaListaComponent implements OnInit {
     private professorService: ProfessorService,
     private disciplinaService: DisciplinaService,
     private tostr: ToastrService
-  ) { }
+  ) { 
+    this.listaTurmas();
+   }
 
-  async ngOnInit() {
-    const x = this.turmaService.getData();
-    x.snapshotChanges().subscribe(item => {
-      this.turmasLista = [];
-      item.forEach(async element => {
-        const y = element.payload.toJSON();
-        // retorna id do professor
-        const p = await this.professorService.professorById(y['professorId']);
-        const d = await this.disciplinaService.disciplinaById(y['disciplinaId']);
-        y['$codigoTurma'] = element.key;
-        y['dadosProfessor'] = p.val();
-        y['dadosDisciplina'] = d.val();
-        this.turmasLista.push(y as Turma);
-      });
-    });
+  ngOnInit() {
   }
 
   editarTurma(turma: Turma) {
@@ -45,8 +34,38 @@ export class TurmaListaComponent implements OnInit {
   deletarTurma(codigoTurma: string) {
     if (confirm('Deseja realmente excluir este registro?') === true) {
       this.turmaService.deletarTurma(codigoTurma);
-      this.tostr.warning('Registro deletado.');
+      this.tostr.success('Registro deletado.');
     }
   }
 
+  async listaTurmas() {
+    const x = this.turmaService.getData();
+    x.snapshotChanges().subscribe(item => {
+      this.turmasLista = [];
+      item.forEach(async element => {
+        const y = element.payload.toJSON();
+        // retorna id do professor
+        const p = await this.professorService.professorById(y['professorId']);
+        const d = await this.disciplinaService.disciplinaById(y['disciplinaId']);
+        const t = await this.turmaService.alunoByTurma();
+
+        const listaDeAlunos = [];
+        const valores = t.val();
+
+        for (const key in valores) {
+          if (valores[key].turmaId === element.key) {
+            listaDeAlunos.push(valores[key].alunoId);
+          }
+        }
+
+        y['$codigoTurma'] = element.key;
+        y['dadosProfessor'] = p.val();
+        y['dadosDisciplina'] = d.val();
+        y['listaAlunos'] = listaDeAlunos;
+        console.log(y);
+
+        this.turmasLista.push(y as Turma);
+      });
+    });
+  }
 }

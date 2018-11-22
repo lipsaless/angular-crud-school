@@ -1,11 +1,11 @@
 <h6 class="text-center">Lista de Turmas</h6><br/>
-<table class="table">
+<table class="ui very basic table">
   <thead>
     <tr>
       <th>Turma</th>
       <th>Professor</th>
       <th>Disciplina</th>
-      <th>Ações</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -13,11 +13,14 @@
         <td> {{ t.nome }} </td>
         <td> {{ t.dadosProfessor.nome }} </td>
         <td> {{ t.dadosDisciplina.nome }} </td>
-        <td>
-          <button class="btn btn-primary" (click)="editarTurma(t)">
+        <td class="right aligned">
+          <button class="ui green button" (click)="alocarAluno(t)">
+            <i class="fa fa-user"></i>
+          </button>
+          <button class="ui blue button" (click)="editarTurma(t)">
             <i class="fa fa-pencil"></i>
           </button>
-          <button class="btn btn-danger" (click)="deletarTurma(t.$codigoTurma)">
+          <button class="ui red button" (click)="deletarTurma(t.$codigoTurma)">
             <i class="fa fa-trash-o"></i>
           </button>
         </td>

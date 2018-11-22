@@ -13,9 +13,25 @@ export class ProfessorListaComponent implements OnInit {
   professoresLista: Professor[];
   constructor(
     private professorService: ProfessorService, private tostr: ToastrService
-  ) { }
+  ) { 
+    this.listaProfessores();
+  }
 
   ngOnInit() {
+  }
+
+  editarProfessor(professor: Professor) {
+    this.professorService.professorSelecionado = Object.assign({}, professor);
+  }
+
+  deletarProfessor(codigoProfessor: string) {
+    if (confirm('Deseja realmente excluir este registro?') === true) {
+      this.professorService.deletarProfessor(codigoProfessor);
+      this.tostr.success('Registro deletado.');
+    }
+  }
+
+  listaProfessores() {
     const x = this.professorService.getData();
     x.snapshotChanges().subscribe(item => {
       this.professoresLista = [];
@@ -26,16 +42,4 @@ export class ProfessorListaComponent implements OnInit {
       });
     });
   }
-
-  editarProfessor(professor: Professor) {
-    this.professorService.professorSelecionado = Object.assign({}, professor);
-  }
-
-  deletarProfessor(codigoProfessor: string) {
-    if (confirm('Deseja realmente excluir este registro?') === true) {
-      this.professorService.deletarProfessor(codigoProfessor);
-      this.tostr.warning('Registro deletado.');
-    }
-  }
-
 }

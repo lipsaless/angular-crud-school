@@ -18,16 +18,16 @@ export class SalaService {
 
   criarSala(sala: Sala) {
     this.salaDados.push({
-      $turmaId: sala.$turmaId,
-      $alunoId: sala.$turmaId,
+      turmaId: sala.turmaId,
+      alunoId: sala.turmaId,
     });
   }
 
   alterarSala(sala: Sala) {
     this.salaDados.update(sala.$codigoSala,
       {
-        $turmaId: sala.$turmaId,
-        $alunoId: sala.$alunoId
+        turmaId: sala.turmaId,
+        alunoId: sala.alunoId
       });
   }
 
