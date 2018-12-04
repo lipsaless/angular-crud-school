@@ -3,13 +3,16 @@
     <div class="card">
       <div class="card-body">
         <h2 class="text-center">Registro</h2>
+        <!-- Ao submitar o formulário de login a função "registrarUsuario()" é acionada -->
         <form (submit)="registrarUsuario()">
           <div class="form-group">
             <label for="email">E-mail</label>
+            <!-- ngMODEL é o mesmo que o value -->
             <input type="email" name="email" id="email" [(ngModel)]="email" class="form-control">
           </div>
           <div class="form-group">
             <label for="senha">Senha</label>
+            <!-- ngMODEL é o mesmo que o value -->
             <input type="password" name="senha" id="senha" [(ngModel)]="senha" class="form-control">
           </div>
           <button #btnRegistro class="btn btn-success btn-block btn-lg" type="submit">Registrar</button>

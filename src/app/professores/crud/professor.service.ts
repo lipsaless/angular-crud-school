@@ -12,11 +12,15 @@ export class ProfessorService {
     private firebase: AngularFireDatabase
   ) { }
 
+  // retorna todos os professores
   getData() {
+    // guarda na variável "professoresLista" a lista de professores
     this.professoresLista = this.firebase.list('Professor');
+    // retorna a lista
     return this.professoresLista;
   }
-  
+
+  // busca o professor passando seu ID como parâmetro
   professorById(idProfessor) {
     return this.firebase.database.ref('/Professor/' + idProfessor).once('value');
   }

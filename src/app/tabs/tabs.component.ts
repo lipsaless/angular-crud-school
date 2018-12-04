@@ -10,13 +10,15 @@ import { MatTabChangeEvent } from '@angular/material';
   styleUrls: ['./tabs.component.css']
 })
 export class TabsComponent implements OnInit {
+  // variáveis
   navLinks: any[];
   tabIndex = 0;
 
   constructor(
     private router: AppRouter,
     private routerAngular: Router
-  ) { 
+  ) {
+    // lista dos links que ficam nas tabs e suas rotas
     this.navLinks = [
       {
         label: 'Alunos',

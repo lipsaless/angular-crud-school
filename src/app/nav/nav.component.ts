@@ -33,8 +33,8 @@ export class NavComponent implements OnInit {
 
   sair() {
     this.logged.emit(false);
-    localStorage.removeItem('user');
+    localStorage.removeItem('user_school@user');
     this.authService.sair();
-    this.routerAngular.navigate(['/registro']);
+    this.routerAngular.navigate(['/login']);
   }
 }

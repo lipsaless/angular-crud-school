@@ -1,4 +1,6 @@
-<form #turmaForm="ngForm" (ngSubmit)="submitarFormulario(turmaForm)">
+<!-- Formulário -->
+<form #turmaForm="ngForm" (ngSubmit)="submitarFormulario(turmaForm)"> <!-- Passando valores do formulário para função -->
+  <!-- ngMODEL é como se fosse o value -->
     <input type="hidden" name="$codigoTurma" #$key="ngModel" [(ngModel)]="turmaService.turmaSelecionada.$codigoTurma">
   <div class="form-group">
     <label>Nome</label>
@@ -8,7 +10,7 @@
     <label>Professor da turma *</label>
     <select name="professorId" [(ngModel)]="turmaService.turmaSelecionada.professorId" class="form-control">
       <option value="" selected> Selecione </option>
-      <!-- <option *ngIf="listaProfessores.length == 0"><i>Nenhum professor cadastrado</i></option> -->
+      <!-- FOR para listar professores -->
       <option *ngFor="let p of listaProfessores" value="{{ p.$codigoProfessor }}"> {{ p.nome }} </option>
     </select>
   </div>
@@ -16,12 +18,12 @@
     <label>Disciplina da turma *</label>
     <select name="disciplinaId" [(ngModel)]="turmaService.turmaSelecionada.disciplinaId" class="form-control">
       <option value="" selected> Selecione </option>
-      <!-- <option *ngIf="listaProfessores.length == 0"><i>Nenhum professor cadastrado</i></option> -->
+      <!-- FOR para listar disciplinas -->
       <option *ngFor="let d of listaDisciplinas" value="{{ d.$codigoDisciplina }}"> {{ d.nome }} </option>
     </select>
   </div>
   <div class="form-group">
-    <button class="btn btn-success" type="submit" [disabled]="!turmaForm.valid">
+    <button class="btn btn-success" type="submit" [disabled]="!turmaForm.valid"> <!-- botão só é clicável quando formulario está completo-->
       <i class="fa fa-check"></i>
        Cadastrar
     </button>
@@ -32,6 +34,7 @@
   </div>
 </form>
 
+<!-- tabela só aparece SE existir o ID da turma -->
 <table class="ui very basic table" *ngIf="turmaService.turmaSelecionada.$codigoTurma">
   <thead>
     <tr>
@@ -42,12 +45,15 @@
     </tr>
   </thead>
   <tbody>
+    <!-- FOR para preencher a tabela de alunos -->
     <tr *ngFor="let a of listaAlunos">
       <td> {{ a.nome }} </td>
       <td> {{ a.sobrenome }} </td>
       <td> {{ a.idade }} </td>
       <td class="right aligned">
+        <!-- ALOCADO só aparece SE o aluno estivar realmente alocado -->
         <span *ngIf="isAlocado(a.$codigoAluno)">Alocado</span>
+        <!-- botão de alocar só aparece se o aluno não estiver ALOCADO -->
         <button *ngIf="!isAlocado(a.$codigoAluno)" class="ui green button" (click)="alocarAluno(a, turmaService.turmaSelecionada.$codigoTurma)">
           <i class="fa fa-arrow-right"></i>
         </button>
@@ -55,26 +61,3 @@
     </tr>
   </tbody>
 </table>
-
-<!-- <table class="ui very basic table" *ngIf="turmaService.turmaSelecionada.$codigoTurma">
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Sobrenome</th>
-        <th>Idade</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let a of turmaService.turmaSelecionada.listaAlunos">
-        <td> {{ a.nome }} </td>
-        <td> {{ a.sobrenome }} </td>
-        <td> {{ a.idade }} </td>
-        <td class="right aligned">
-          <button class="ui green button" (click)="alocarAluno(a, turmaService.turmaSelecionada.$codigoTurma)">
-            <i class="fa fa-pencil"></i>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table> -->

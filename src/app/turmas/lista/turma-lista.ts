@@ -1,30 +1,67 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TurmaService } from '../crud/turma.service';
-import { ProfessorService } from '../../professores/crud/professor.service';
-import { DisciplinaService } from '../../disciplinas/crud/disciplina.service';
-import { AlunoService } from '../../alunos/crud/aluno.service';
-
-import { Turma } from '../crud/turma.model';
+// importando toastr, que é um plugin de mensagens
 import { ToastrService } from 'ngx-toastr';
 
+// importando model de turma
+import { Turma } from '../crud/turma.model';
+// importando model de aluno
+import { Aluno } from '../../alunos/crud/aluno.model';
+
+// Serviços
+import { TurmaService } from '../crud/turma.service';
+import { AlunoService } from '../../alunos/crud/aluno.service';
+import { ProfessorService } from '../../professores/crud/professor.service';
+import { DisciplinaService } from '../../disciplinas/crud/disciplina.service';
+
 @Component({
-  selector: 'app-turma-lista',
-  templateUrl: './turma-lista.html',
-  styleUrls: ['./turma-lista.css']
+  selector: 'app-turma-lista', // nome da tag html
+  templateUrl: './turma-lista.html', // arquivo html deste componente
+  styleUrls: ['./turma-lista.css'] // arquivo css deste componente
 })
 export class TurmaListaComponent implements OnInit {
+  // variáveis
   turmasLista: Turma[];
+  listaAlunos: any;
+
   constructor(
+    private tostr: ToastrService,
     private turmaService: TurmaService,
+    private alunoService: AlunoService,
     private professorService: ProfessorService,
     private disciplinaService: DisciplinaService,
-    private tostr: ToastrService
-  ) { 
+  ) {
+    // no constructor ele já lista as turmas
     this.listaTurmas();
+
+    // guarda dados todos os alunos na váriavel "dadosAluno"
+    const dadosAluno = this.alunoService.getData();
+    // aqui é usa o subscribe para pegar os dados de todos os alunos, que é guardado na variável "item"
+    dadosAluno.snapshotChanges().subscribe(item => {
+      // torna a váriavel "lista Alunos" em um array
+      this.listaAlunos = [];
+      // é feito um forEach para pegar cada informação de cada aluno
+      item.forEach(element => {
+        // transforma os elementos do forEach em JSON e guarda na variável "dadosAlunoJson"
+        const dadosAlunoJson = element.payload.toJSON();
+        // é guardado em $codigoAluno o seu próprio ID
+        dadosAlunoJson['$codigoAluno'] = element.key;
+        // é implementado na variável "listaAlunos" os dados em JSON de acordo com o model Aluno
+        this.listaAlunos.push(dadosAlunoJson as Aluno);
+      });
+    });
    }
 
   ngOnInit() {
+    console.log(this.listaAlunos);
+    // preenche o formulário com todos os dados null
+    this.turmaService.turmaSelecionada = {
+      $codigoTurma: null,
+      nome: '',
+      professorId: null,
+      disciplinaId: null,
+      listaAlunos: null
+    };
   }
 
   editarTurma(turma: Turma) {
@@ -32,15 +69,18 @@ export class TurmaListaComponent implements OnInit {
   }
 
   deletarTurma(codigoTurma: string) {
+    // verificação de exclusão
     if (confirm('Deseja realmente excluir este registro?') === true) {
+      // caso confirme a turma é deletada
       this.turmaService.deletarTurma(codigoTurma);
+      // após ser deletada a mensagem é mostrada
       this.tostr.success('Registro deletado.');
     }
   }
 
   async listaTurmas() {
-    const x = this.turmaService.getData();
-    x.snapshotChanges().subscribe(item => {
+    const dadosTurmas = this.turmaService.getData();
+    dadosTurmas.snapshotChanges().subscribe(item => {
       this.turmasLista = [];
       item.forEach(async element => {
         const y = element.payload.toJSON();
@@ -61,11 +101,32 @@ export class TurmaListaComponent implements OnInit {
         y['$codigoTurma'] = element.key;
         y['dadosProfessor'] = p.val();
         y['dadosDisciplina'] = d.val();
+        y['alunos'] = this.listaAlunos;
         y['listaAlunos'] = listaDeAlunos;
         console.log(y);
 
         this.turmasLista.push(y as Turma);
       });
     });
+  }
+
+  // verifica se o aluno está alocado na turma
+  isAlocado(alunoId) {
+    // a variável "listaTurma" recebe a lista de alunos daquela turma
+    const listaDaTurma = this.turmaService.turmaSelecionada.listaAlunos;
+    console.log(listaDaTurma);
+    if (listaDaTurma.indexOf(alunoId) !== -1) {
+      return true;
+    }
+    return false;
+  }
+
+  // aloca aluno na turma
+  alocarAluno(aluno: any, idTurma) {
+    // variável que guarda o ID do aluno
+    const alunoId = aluno.$codigoAluno;
+    // aloca aluno
+    this.turmaService.alocarAlunoTurma(alunoId, idTurma);
+    this.turmaService.turmaSelecionada.listaAlunos.push(aluno.$codigoAluno);
   }
 }

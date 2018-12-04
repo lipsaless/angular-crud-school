@@ -6,9 +6,38 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FormsModule } from '@angular/forms';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+// Config firebase
+import { environment } from '../environments/environment';
+
+// Plugin mensagens
+import { ToastrModule } from 'ngx-toastr';
+
+// Rotas
+import { AppRouter } from './app.routes';
+
+// Serviço de autenticação
+import { AuthService } from './auth.service';
+
+// Biblioteca CSS
+import { MatTabsModule } from '@angular/material';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
+// Angular firestore
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
+// ======================== Componentes ==============================
 
 import { AppComponent } from './app.component';
-import { environment } from '../environments/environment';
+import { TabsComponent } from './tabs/tabs.component';
+import { HomeComponent } from './home/home.component';
+import { NavComponent } from './nav/nav.component';
+import { RegistrarComponent } from './registrar/registrar.component';
+import { LoginComponent } from './login/login.component';
+import { PaginaNotFoundComponent } from './pagina-not-found/pagina-not-found.component';
+
+// ===================== Páginas =========================================
 // alunos
 import { AlunosComponent } from './alunos/alunos';
 import { AlunoCriaComponent } from './alunos/cria/aluno-cria';
@@ -29,86 +58,51 @@ import { TurmasComponent } from './turmas/turmas';
 import { TurmaCriaComponent } from './turmas/cria/turma-cria';
 import { TurmaListaComponent } from './turmas/lista/turma-lista';
 import { TurmaService } from './turmas/crud/turma.service';
-// Sala de aula
-import { SalaComponent } from './sala-de-aula/sala-de-aula';
-import { SalaCriaComponent } from './sala-de-aula/cria/sala-de-aula-cria';
-import { SalaListaComponent } from './sala-de-aula/lista/sala-de-aula-lista';
 
-import { ToastrModule } from 'ngx-toastr';
-
-// routes
-import { AppRouter } from './app.routes';
-
-// material angular
-import { MatTabsModule } from '@angular/material';
-import {MatTableModule} from '@angular/material/table';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-
-import { TabsComponent } from './tabs/tabs.component';
-import { HomeComponent } from './home/home.component';
-import { NavComponent } from './nav/nav.component';
-import { RegistrarComponent } from './registrar/registrar.component';
-import { LoginComponent } from './login/login.component';
-import { PaginaNotFoundComponent } from './pagina-not-found/pagina-not-found.component';
-
-import { AuthService } from './auth.service';
-
-import { FlashMessagesModule } from 'angular2-flash-messages';
-import { FlashMessagesService } from 'angular2-flash-messages';
-
-import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AlunosComponent,
-    AlunoCriaComponent,
-    AlunoListaComponent,
-    ProfessoresComponent,
-    ProfessorCriaComponent,
-    ProfessorListaComponent,
-    DisciplinasComponent,
-    DisciplinaCriaComponent,
-    DisciplinaListaComponent,
-    TurmasComponent,
-    TurmaCriaComponent,
-    TurmaListaComponent,
-    SalaComponent,
-    SalaCriaComponent,
-    SalaListaComponent,
+    NavComponent,
     TabsComponent,
     HomeComponent,
-    NavComponent,
-    RegistrarComponent,
     LoginComponent,
-    PaginaNotFoundComponent
+    AlunosComponent,
+    TurmasComponent,
+    AlunoCriaComponent,
+    TurmaCriaComponent,
+    RegistrarComponent,
+    TurmaListaComponent,
+    AlunoListaComponent,
+    ProfessoresComponent,
+    DisciplinasComponent,
+    ProfessorCriaComponent,
+    ProfessorListaComponent,
+    PaginaNotFoundComponent,
+    DisciplinaCriaComponent,
+    DisciplinaListaComponent,
   ],
   imports: [
-    BrowserModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    FormsModule,
-    ToastrModule.forRoot({ positionClass: 'toast-top-center', progressBar: true }),
     AppRouter,
+    FormsModule,
+    BrowserModule,
     MatTabsModule,
+    MatIconModule,
     MatTableModule,
     MatButtonModule,
-    MatIconModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule,
     BrowserAnimationsModule,
-    FlashMessagesModule,
-    MultiselectDropdownModule,
-    AngularFirestoreModule
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    ToastrModule.forRoot({ positionClass: 'toast-top-center', progressBar: true }),
   ],
   providers: [
-    ProfessorService,
-    DisciplinaService,
     AuthService,
-    FlashMessagesService,
     AlunoService,
-    TurmaService
+    TurmaService,
+    ProfessorService,
+    DisciplinaService
   ],
   bootstrap: [AppComponent]
 })
