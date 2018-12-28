@@ -1,3 +1,4 @@
+<h6 class="text-center">Cadastrar Turma</h6><br/>
 <!-- Formulário -->
 <form #turmaForm="ngForm" (ngSubmit)="submitarFormulario(turmaForm)"> <!-- Passando valores do formulário para função -->
   <!-- ngMODEL é como se fosse o value -->
@@ -25,7 +26,7 @@
   <div class="form-group">
     <button class="btn btn-success" type="submit" [disabled]="!turmaForm.valid"> <!-- botão só é clicável quando formulario está completo-->
       <i class="fa fa-check"></i>
-       Cadastrar
+       Salvar
     </button>
     <button class="btn btn-default" type="button" (click)="resetarFormulario(turmaForm)">
       <i class="fa fa-tr"></i>
@@ -33,31 +34,3 @@
     </button>
   </div>
 </form>
-
-<!-- tabela só aparece SE existir o ID da turma -->
-<table class="ui very basic table" *ngIf="turmaService.turmaSelecionada.$codigoTurma">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Sobrenome</th>
-      <th>Idade</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- FOR para preencher a tabela de alunos -->
-    <tr *ngFor="let a of listaAlunos">
-      <td> {{ a.nome }} </td>
-      <td> {{ a.sobrenome }} </td>
-      <td> {{ a.idade }} </td>
-      <td class="right aligned">
-        <!-- ALOCADO só aparece SE o aluno estivar realmente alocado -->
-        <span *ngIf="isAlocado(a.$codigoAluno)">Alocado</span>
-        <!-- botão de alocar só aparece se o aluno não estiver ALOCADO -->
-        <button *ngIf="!isAlocado(a.$codigoAluno)" class="ui green button" (click)="alocarAluno(a, turmaService.turmaSelecionada.$codigoTurma)">
-          <i class="fa fa-arrow-right"></i>
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>

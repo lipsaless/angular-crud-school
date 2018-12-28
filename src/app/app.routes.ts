@@ -13,7 +13,7 @@ import { PaginaNotFoundComponent } from './pagina-not-found/pagina-not-found.com
 
 // rotas
 const routes: Routes = [
-    { path: '', redirectTo: '/registro', pathMatch: 'full' },
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'registro', component: RegistrarComponent },
     { path: 'home', component: HomeComponent },

@@ -3,9 +3,8 @@ import { Component, OnInit } from '@angular/core';
 // importando toastr, que é um plugin de mensagens
 import { ToastrService } from 'ngx-toastr';
 
-// importando model de turma
+// importando models
 import { Turma } from '../crud/turma.model';
-// importando model de aluno
 import { Aluno } from '../../alunos/crud/aluno.model';
 
 // Serviços
@@ -13,6 +12,7 @@ import { TurmaService } from '../crud/turma.service';
 import { AlunoService } from '../../alunos/crud/aluno.service';
 import { ProfessorService } from '../../professores/crud/professor.service';
 import { DisciplinaService } from '../../disciplinas/crud/disciplina.service';
+
 
 @Component({
   selector: 'app-turma-lista', // nome da tag html
@@ -33,10 +33,7 @@ export class TurmaListaComponent implements OnInit {
   ) {
     // no constructor ele já lista as turmas
     this.listaTurmas();
-
-    // guarda dados todos os alunos na váriavel "dadosAluno"
     const dadosAluno = this.alunoService.getData();
-    // aqui é usa o subscribe para pegar os dados de todos os alunos, que é guardado na variável "item"
     dadosAluno.snapshotChanges().subscribe(item => {
       // torna a váriavel "lista Alunos" em um array
       this.listaAlunos = [];
@@ -53,8 +50,6 @@ export class TurmaListaComponent implements OnInit {
    }
 
   ngOnInit() {
-    console.log(this.listaAlunos);
-    // preenche o formulário com todos os dados null
     this.turmaService.turmaSelecionada = {
       $codigoTurma: null,
       nome: '',
@@ -62,6 +57,10 @@ export class TurmaListaComponent implements OnInit {
       disciplinaId: null,
       listaAlunos: null
     };
+  }
+
+  listarAlunos(turma: Turma) {
+    this.turmaService.turmaSelecionada = Object.assign({}, turma);
   }
 
   editarTurma(turma: Turma) {
@@ -103,7 +102,6 @@ export class TurmaListaComponent implements OnInit {
         y['dadosDisciplina'] = d.val();
         y['alunos'] = this.listaAlunos;
         y['listaAlunos'] = listaDeAlunos;
-        console.log(y);
 
         this.turmasLista.push(y as Turma);
       });
@@ -114,7 +112,6 @@ export class TurmaListaComponent implements OnInit {
   isAlocado(alunoId) {
     // a variável "listaTurma" recebe a lista de alunos daquela turma
     const listaDaTurma = this.turmaService.turmaSelecionada.listaAlunos;
-    console.log(listaDaTurma);
     if (listaDaTurma.indexOf(alunoId) !== -1) {
       return true;
     }

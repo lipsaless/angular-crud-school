@@ -32,6 +32,7 @@ export class NavComponent implements OnInit {
   }
 
   sair() {
+    this.logado = false;
     this.logged.emit(false);
     localStorage.removeItem('user_school@user');
     this.authService.sair();

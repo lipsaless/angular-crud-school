@@ -1,4 +1,5 @@
-<h6 class="text-center">Lista de Turmas</h6><br/>
+<h6 class="text-center">Lista de Turmas</h6>
+<br/>
 <table class="ui very basic table">
   <thead>
     <tr>
@@ -15,7 +16,7 @@
         <td> {{ t.dadosProfessor.nome }} </td>
         <td> {{ t.dadosDisciplina.nome }} </td>
         <td class="right aligned">
-          <button type="button" class="ui green button" data-toggle="modal" data-target="#exampleModalCenter">
+          <button type="button" class="ui green button" data-toggle="modal" data-target="#exampleModalCenter" (click)="listarAlunos(t)">
             Alocar alunos
           </button>
           <button class="ui blue button" (click)="editarTurma(t)">
@@ -31,46 +32,55 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <!-- tabela só aparece SE existir o ID da turma -->
-          <table class="ui very basic table">
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Sobrenome</th>
-                  <th>Idade</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- FOR para preencher a tabela de alunos -->
-                <tr *ngFor="let a of turmasLista">
-                  <td> {{ a.alunos.nome }} </td>
-                  <td> {{ a.alunos.sobrenome }} </td>
-                  <td> {{ a.alunos.idade }} </td>
-                  <td class="right aligned">
-                    <!-- ALOCADO só aparece SE o aluno estivar realmente alocado -->
-                    <span *ngIf="isAlocado(a.alunos.$codigoAluno)">Alocado</span>
-                    <!-- botão de alocar só aparece se o aluno não estiver ALOCADO -->
-                    <button *ngIf="!isAlocado(a.alunos.$codigoAluno)" class="ui green button" (click)="alocarAluno(a, turmaService.turmaSelecionada.$codigoTurma)">
-                      <i class="fa fa-arrow-right"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        </div>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"> Lista de alunos </h5>
+        <br>
+        <p> {{ t.nome }} </p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="listaAlunos.length > 0">
+        <!-- tabela só aparece SE existir o ID da turma -->
+        <table class="ui very basic table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Sobrenome</th>
+                <th>Idade</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- FOR para preencher a tabela de alunos -->
+              <tr *ngFor="let a of listaAlunos">
+                <td> {{ a.nome }} </td>
+                <td> {{ a.sobrenome }} </td>
+                <td> {{ a.idade }} </td>
+                <td class="right aligned">
+                  <!-- ALOCADO só aparece SE o aluno estivar realmente alocado -->
+                  <span *ngIf="isAlocado(a.$codigoAluno)">Alocado</span>
+                  <!-- botão de alocar só aparece se o aluno não estiver ALOCADO -->
+                  <button *ngIf="!isAlocado(a.$codigoAluno)" class="ui green button" (click)="alocarAluno(a, turmaService.turmaSelecionada.$codigoTurma)">
+                    <i class="fa fa-arrow-right"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <div *ngIf="listaAlunos.length < 0">
+        <p>
+          <i>Nenhum aluno cadastrado no sistema.</i>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Fechar
+        </button>
       </div>
     </div>
   </div>
+</div>

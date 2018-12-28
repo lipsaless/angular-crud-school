@@ -29,12 +29,11 @@ export class TurmaCriaComponent implements OnInit {
   isEdicao = false; // variável criada para aparecer html na tela apenas quando estiver na tela de edição
 
   constructor(
-    // Instanciando serviços e guardando cada um em uma variável
-    private turmaService: TurmaService,
     private tostr: ToastrService,
+    private alunoService: AlunoService,
+    private turmaService: TurmaService,
     private professorService: ProfessorService,
-    private disciplinaService: DisciplinaService,
-    private alunoService: AlunoService
+    private disciplinaService: DisciplinaService
   ) {
     // aqui a variável "listaProfessores" recebe a lista de professores que a função getData retorna, ela está no serviço do professor
     this.listaProfessores = professorService.getData();
